@@ -5,6 +5,7 @@
 #pragma once
 
 #include "common/common_types.h"
+#include "common/swap.h"
 
 #include "core/hle/kernel/kernel.h"
 
@@ -71,6 +72,18 @@ enum class StartupArgumentType : u32 {
     OtherApp   = 0,
     Restart    = 1,
     OtherMedia = 2,
+};
+
+struct CaptureBufferInfo {
+    u32_le size;
+    u8 is_3d;
+    INSERT_PADDING_BYTES(0x3); // Padding for alignment
+    u32_le top_screen_left_offset;
+    u32_le top_screen_right_offset;
+    u32_le top_screen_format;
+    u32_le bottom_screen_left_offset;
+    u32_le bottom_screen_right_offset;
+    u32_le bottom_screen_format;
 };
 
 /// Send a parameter to the currently-running application, which will read it via ReceiveParameter
